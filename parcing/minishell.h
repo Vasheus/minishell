@@ -6,7 +6,7 @@
 /*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:58:15 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/02 16:32:34 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/02 16:37:03 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int    syntax2(t_list **lst);
 int    syntax3(t_list **lst);
 int    syntax4(t_list **lst);
 int    syntax(t_list **lst);
-int     error_message();
+int    error_message();
 
 
 
