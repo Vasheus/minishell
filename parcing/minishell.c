@@ -6,11 +6,11 @@
 /*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 11:10:03 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/02 16:03:31 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/02 19:01:40 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parcing.h"
 
 int main(void)
 {
@@ -21,7 +21,7 @@ int main(void)
     while (1)
     {
         input = readline("> ");
-        if (input == NULL || ft_strncmp(input, "exit", 4) == 0)
+        if (input == NULL || ft_strcmp(input, "exit") == 0)
         {
             free(input);
             break;
@@ -34,7 +34,7 @@ int main(void)
         tmp = lst;
         while (tmp)
         {
-            printf("Token: %s, Type: %s\n", (char *)tmp->content, tmp->type);
+            printf("Token: %s, Type: %u\n", (char *)tmp->content, tmp->type);
             tmp = tmp->next;
         }
 

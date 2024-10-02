@@ -6,11 +6,11 @@
 /*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 11:07:04 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/01 14:57:57 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/02 19:01:49 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"  // "space" "" '' $ | > < >> << \t
+#include "parcing.h"  // "space" "" '' $ | > < >> << \t
 
 static void	handle_single_char(char *str, int i, t_list **lst)
 {
@@ -18,11 +18,11 @@ static void	handle_single_char(char *str, int i, t_list **lst)
 
 	new_node = ft_lstnew(ft_substr(str, i, 1));
 	if (str[i] == '|')
-		new_node->type = "pipe";
+		new_node->command = PIPE;
 	else if (str[i] == '<')
-		new_node->type = "rd_in";
+		new_node->command = RD_IN;
 	else if (str[i] == '>')
-		new_node->type = "rd_out";
+		new_node->command = RD_OUT;
 	ft_lstadd_back(lst, new_node);
 }
 
@@ -33,14 +33,14 @@ static int	parse_operator(char *str, int i, t_list **lst)
 	if (str[i] == '<' && str[i + 1] == '<')
 	{
 		new_node = ft_lstnew(ft_substr(str, i, 2));
-		new_node->type = "heredoc";
+		new_node->command = HEREDOC;
 		ft_lstadd_back(lst, new_node);
 		i++;
 	}
 	else if (str[i] == '>' && str[i + 1] == '>')
 	{
 		new_node = ft_lstnew(ft_substr(str, i, 2));
-		new_node->type = "append";
+		new_node->command = APPEND;
 		ft_lstadd_back(lst, new_node);
 		i++;
 	}
@@ -65,7 +65,7 @@ static int	parse_variable(char *str, int i, t_list **lst)
 		while (str[i] && str[i] != ' ' && str[i] != '|' && str[i] != '>' && str[i] != '<' && str[i] != '\'' && str[i] != '"')
 			i++;
 		new_node = ft_lstnew(ft_substr(str, k, i - k));
-		new_node->type = "var";
+		new_node->command = VAR;
 		ft_lstadd_back(lst, new_node);
 	}
 	else
@@ -85,9 +85,9 @@ static int	parse_quote(char *str, int i, t_list **lst, char quote_type)
 		i++;
 	new_node = ft_lstnew(ft_substr(str, k, i - k + 1));
 	if (quote_type == '\'')
-		new_node->type = "s_quote";
+		new_node->command = S_QUOTE;
 	else
-		new_node->type = "d_quote";
+		new_node->command = D_QUOTE;
 	ft_lstadd_back(lst, new_node);
 	return i;
 }

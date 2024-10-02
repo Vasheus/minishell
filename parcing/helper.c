@@ -6,11 +6,11 @@
 /*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 10:42:59 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/02 15:47:19 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/02 19:01:29 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parcing.h"
 
 size_t	ft_strlen(const char *str)
 {
@@ -23,14 +23,14 @@ size_t	ft_strlen(const char *str)
 	}
 	return (i);
 }
-int	ft_strncmp(char *s1, char *s2, size_t n)
+int	ft_strcmp(char *s1, char *s2)
 {
 	size_t	i;
 
 	i = 0;
-	if (!s1 && !s2 && n == 0)
+	if (!s1 && !s2)
 		return (0);
-	while ((s1[i] != '\0' || s2[i] != '\0') && i < n)
+	while ((s1[i] != '\0' || s2[i] != '\0'))
 	{
 		if (s1[i] != s2[i])
 		{

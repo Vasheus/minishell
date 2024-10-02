@@ -6,7 +6,7 @@
 /*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:58:15 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/02 16:37:03 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/02 18:52:03 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,32 @@
 #include <stdio.h>
 
 
+typedef enum s_type
+{
+    BUILT_IN,
+    SIMPLE_COMMAND,
+} t_type;
+
+typedef enum s_command
+{
+    RD_IN,
+    RD_OUT,
+    APPEND,
+    HEREDOC,
+    S_QUOTE,
+    D_QUOTE,
+    PIPE,
+    VAR,
+    SPACE,
+    WORD,
+} t_command;
+
 typedef struct s_list
 {
-    char    *content;
-    char    *type;    
+    char        *content;
+    t_type      type;
+    t_command   command;
     struct s_list  *next;
-    char    *command;
 } t_list;
 
 // list utils
@@ -35,8 +55,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstdelone(t_list *lst, void (*del)(void *));
 
 // helper funcions
-char	**ft_split_space(char const *s);
-int     ft_strncmp(char *s1, char *s2, size_t n);
+int     ft_strcmp(char *s1, char *s2);
 size_t  ft_strlen(const char *str);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strdup(const char *s);

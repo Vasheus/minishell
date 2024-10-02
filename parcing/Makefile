@@ -6,7 +6,7 @@
 #    By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/26 11:46:55 by yosabir           #+#    #+#              #
-#    Updated: 2024/10/02 13:54:13 by yosabir          ###   ########.fr        #
+#    Updated: 2024/10/02 19:02:19 by yosabir          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ all: $(NAME)
 $(NAME):  $(OBJECTS)
 	$(CC) $(FLAGS) -o $@ $(OBJECTS) -lreadline
 
-%.o: %.c minishell.h
+%.o: %.c parcing.h
 	$(CC) $(FLAGS) -c $< -o $@
 
 clean:

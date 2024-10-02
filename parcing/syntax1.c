@@ -6,32 +6,32 @@
 /*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 15:20:17 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/02 15:52:36 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/02 19:01:54 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parcing.h"
 
 static int is_redirection(t_list *token)
 {
-    return (token && (ft_strncmp(token->content, ">>", 2) == 0 
-                || ft_strncmp(token->content, "<<", 2) == 0 
-                || ft_strncmp(token->content, ">", 1) == 0 
-                || ft_strncmp(token->content, "<", 1) == 0));
+    return (token && (ft_strcmp(token->content, ">>") == 0 
+                || ft_strcmp(token->content, "<<") == 0 
+                || ft_strcmp(token->content, ">") == 0 
+                || ft_strcmp(token->content, "<") == 0));
 }
 int is_valid_next(t_list *token)
 {
-    return (token && (ft_strncmp(token->type, "s_quote", 7) == 0 
-                    ||ft_strncmp(token->type, "d_quote", 7) == 0 
-                    || ft_strncmp(token->type, "word", 4) == 0
-                    || ft_strncmp(token->type, "var", 3) == 0));
+    return (token && (token->command == S_QUOTE 
+                    ||token->command == D_QUOTE 
+                    || token->command == WORD
+                    || token->type == VAR));
 }
 int syntax1(t_list **lst)
 {
     t_list *current;
     
     current = *lst;
-    if (current && ft_strncmp(current->content, "|", 1) == 0)
+    if (current && ft_strcmp(current->content, "|") == 0)
         return (1);
 
     while (current)
@@ -41,7 +41,7 @@ int syntax1(t_list **lst)
             if (check_redirection_followed_by_pipe(current))
                 return (1);
         }
-        else if (ft_strncmp(current->content, "|", 1) == 0)
+        else if (ft_strcmp(current->content, "|") == 0)
         {
             if (check_consecutive_pipes(current))
                 return (1);
@@ -88,7 +88,7 @@ int syntax3(t_list **lst)
     current = *lst;
     while (current)
     {
-        if (is_redirection(current) || ft_strncmp(current->content, "|", 1) == 0)
+        if (is_redirection(current) || ft_strcmp(current->content, "|") == 0)
         {
             t_list *next_token;
             

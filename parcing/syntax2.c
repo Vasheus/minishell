@@ -6,15 +6,15 @@
 /*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 10:46:17 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/02 16:03:01 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/02 19:01:58 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parcing.h"
 
 int is_space(t_list *token)
 {
-    return (token && ft_strncmp(token->type, "space", 5) == 0);
+    return (token && (token->command == SPACE));
 }
 
 int check_redirection_followed_by_pipe(t_list *current)
@@ -26,7 +26,7 @@ int check_redirection_followed_by_pipe(t_list *current)
     while (is_space(next_token))
         next_token = next_token->next;
 
-    if (next_token && ft_strncmp(next_token->type, "pipe", 4) == 0)
+    if (next_token && (next_token->command == PIPE))
         return (1);
     if (!next_token)
         return (1);
@@ -42,7 +42,7 @@ int check_consecutive_pipes(t_list *current)
     while (is_space(next_token))
         next_token = next_token->next;
 
-    if (next_token && ft_strncmp(next_token->content, "|", 1) == 0)
+    if (next_token && ft_strcmp(next_token->content, "|") == 0)
         return (1);
     
     if (!next_token)

@@ -6,11 +6,11 @@
 /*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 11:57:00 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/01 12:40:56 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/02 19:01:44 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parcing.h"
 
 int parse_word(char *str, int i, t_list **lst)
 {
@@ -24,7 +24,7 @@ int parse_word(char *str, int i, t_list **lst)
     if (i > k)
     {
         new_node = ft_lstnew(ft_substr(str, k, i - k));
-        new_node->type = "word";
+        new_node->command = WORD;
         ft_lstadd_back(lst, new_node);
     }
     return i - 1;
@@ -35,7 +35,7 @@ int parse_spaces(char *str, int i, t_list **lst)
     t_list *new_node;
 
     new_node = ft_lstnew(ft_substr(str, i, 1));
-    new_node->type = "space";
+    new_node->command = SPACE;
     
     while (str[i] == ' ' || str[i] == '\t')
         i++;
