@@ -6,7 +6,7 @@
 /*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:58:15 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/02 16:02:47 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/02 16:32:34 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_strdup(const char *s);
 t_list  *parsing(char *str);
 int     parse_word(char *str, int i, t_list **lst);
 int     parse_spaces(char *str, int i, t_list **lst);
-void    classing(t_list **lst)
+void    classing(t_list **lst);
 
 // syntax functions
 int    check_redirection_followed_by_pipe(t_list *lst);
