@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   parcing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:58:15 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/02 18:52:03 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/10 13:55:08 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,17 @@
 #include <readline/history.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
 
+
+typedef struct set_list
+{
+    int input;
+    int output;
+    char **args;
+    struct set_list *next;
+}   set_args;
 
 typedef enum s_type
 {
@@ -60,6 +70,13 @@ size_t  ft_strlen(const char *str);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strdup(const char *s);
 
+// helper function 2
+size_t	ft_strlen(const char *str);
+char	*ft_itoa(int n);
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
+
+
 
 // parcing functiong
 t_list  *parsing(char *str);
@@ -79,6 +96,11 @@ int    syntax4(t_list **lst);
 int    syntax(t_list **lst);
 int    error_message();
 
+//expand functions
+char *get_var_value(char *str);
+
+//heredoc functions
+int create_unique_heredoc_file();
 
 
 

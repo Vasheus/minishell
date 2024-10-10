@@ -6,7 +6,7 @@
 /*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 11:07:04 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/02 19:01:49 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/10 14:53:01 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	parse_variable(char *str, int i, t_list **lst)
 	{
 		while (str[i] && str[i] != ' ' && str[i] != '|' && str[i] != '>' && str[i] != '<' && str[i] != '\'' && str[i] != '"')
 			i++;
-		new_node = ft_lstnew(ft_substr(str, k, i - k));
+		new_node = ft_lstnew(ft_substr(str, k + 1, i - k));
 		new_node->command = VAR;
 		ft_lstadd_back(lst, new_node);
 	}
@@ -83,7 +83,7 @@ static int	parse_quote(char *str, int i, t_list **lst, char quote_type)
 	i++;
 	while (str[i] && str[i] != quote_type)
 		i++;
-	new_node = ft_lstnew(ft_substr(str, k, i - k + 1));
+	new_node = ft_lstnew(ft_substr(str, k + 1, i - k - 1));
 	if (quote_type == '\'')
 		new_node->command = S_QUOTE;
 	else
@@ -103,7 +103,7 @@ t_list	*parsing(char *str)
     {
 		if (str[i] == '|' || str[i] == '<' || str[i] == '>')
             i = parse_operator(str, i, &lst);
-        else if (str[i] == '$')
+        else if (str[i] == '$' && str[i + 1])
             i = parse_variable(str, i, &lst);
         else if (str[i] == '\'' || str[i] == '"')
             i = parse_quote(str, i, &lst, str[i]);

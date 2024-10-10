@@ -6,7 +6,7 @@
 /*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 11:10:03 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/02 19:01:40 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/10 12:27:32 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int main(void)
         tmp = lst;
         while (tmp)
         {
-            printf("Token: %s, Type: %u\n", (char *)tmp->content, tmp->type);
+            printf("Token: %s, Type: %u\n", (char *)tmp->content, tmp->command);
             tmp = tmp->next;
         }
 
