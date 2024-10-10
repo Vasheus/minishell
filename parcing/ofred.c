@@ -6,12 +6,27 @@
 /*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 20:11:35 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/10 14:54:00 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/10 16:42:29 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parcing.h"
 
+int pipe_counter(t_list **lst)
+{
+    t_list *current;
+    int     i;
+    
+    current = *lst;
+    i = 0;
+    while(current)
+    {
+        if(current->command == PIPE)
+            i++;
+        current = current->next;
+    }
+    return (i + 1);
+}
 void handle_redirections(t_list *token, set_args *cmd_args)
 {
     cmd_args->input = 0;
@@ -26,33 +41,50 @@ void handle_redirections(t_list *token, set_args *cmd_args)
         cmd_args->output = create_unique_heredoc_file();
     
 }
-
-set_args *settingargs(t_list **lst, set_args *cmd_args)
+void add_arg_to_set_args(set_args *cmd_args, char *new_arg)
 {
-    t_list *current;
-    int     i;
-    
-    current = *lst;
+    char **new_args;
+    int count;
+    int i;
+
+    count = 0;
     i = 0;
-    while(current)
+    while (cmd_args->args && cmd_args->args[count])
+        count++;
+    new_args = (char **)malloc(sizeof(char *) * (count + 2));
+    if (!new_args)
+        return;
+
+    while (i < count)
     {
-        if(current->command == SPACE)
-            current = current->next;
-        else if(current->command == WORD || current->command == S_QUOTE
-                || current->command == D_QUOTE)
-        {
-            cmd_args->args[i] = current->content;
-            i++;
-        }
-        else if(current->command == VAR)
-        {
-            cmd_args->args[i] = get_var_value(current->content);
-            i++;
-        }
-        else if(current->command == RD_IN || current->command == RD_OUT
-            || current->command == APPEND || current->command == HEREDOC)
-            handle_redirections(current, cmd_args);
-        current = current->next;
+        new_args[i] = cmd_args->args[i];
+        i++;
     }
-    return(cmd_args);
+    new_args[count] = ft_strdup(new_arg);
+    new_args[count + 1] = NULL;
+
+    free(cmd_args->args);
+    cmd_args->args = new_args;
 }
+
+void storing_args(t_list **current, set_args *cmd_args)
+{
+    while (*current && (*current)->command != PIPE)
+    {
+        if ((*current)->command == WORD || (*current)->command == S_QUOTE ||
+            (*current)->command == D_QUOTE)
+            add_arg_to_set_args(cmd_args, (*current)->content);
+        else if ((*current)->command == VAR)
+        {
+            char *var_value;
+            
+            var_value = get_var_value((*current)->content);
+            add_arg_to_set_args(cmd_args, var_value);
+        }
+        else if ((*current)->command == RD_IN || (*current)->command == RD_OUT ||
+                 (*current)->command == APPEND || (*current)->command == HEREDOC)
+            handle_redirections(*current, cmd_args);
+        *current = (*current)->next;
+    }
+}
+

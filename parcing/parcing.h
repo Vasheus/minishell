@@ -6,7 +6,7 @@
 /*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:58:15 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/10 13:55:08 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/10 16:45:19 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ size_t	ft_strlen(const char *str);
 char	*ft_itoa(int n);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
+void	*ft_memcpy(void *dst, const void *src, size_t n);
 
 
 
@@ -102,7 +103,14 @@ char *get_var_value(char *str);
 //heredoc functions
 int create_unique_heredoc_file();
 
+//openingfiles / handling red
+int pipe_counter(t_list **lst);
+void handle_redirections(t_list *token, set_args *cmd_args);
+void add_arg_to_set_args(set_args *cmd_args, char *new_arg);
+void storing_args(t_list **current, set_args *cmd_args);
 
+//settinglist
+set_args *settingargs(t_list **lst);
 
 
 #endif
