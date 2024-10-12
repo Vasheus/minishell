@@ -6,7 +6,7 @@
 /*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 10:46:17 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/02 19:01:58 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/12 14:36:04 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int check_consecutive_pipes(t_list *current)
         return (1);
     return (0);
 }
-int syntax4(t_list **lst)
+int syntax_quotes(t_list **lst)
 {
     t_list *current = *lst;
     char *str;
@@ -76,7 +76,8 @@ int syntax4(t_list **lst)
 }
 int syntax(t_list **lst)
 {
-    if (syntax1(lst) || syntax2(lst) || syntax3(lst) || syntax4(lst))
+    if (syntax_consecutive_redirection(lst) || syntax_end_of_command(lst) 
+        || syntax_quotes(lst) || syntax_redpipe(lst))
         error_message(1);
     return (0);
 }

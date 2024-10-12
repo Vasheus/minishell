@@ -6,7 +6,7 @@
 /*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:58:15 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/10 16:45:19 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/12 15:26:02 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+typedef struct enviroment
+{
+    char **env;
+} env_struct;
 
 typedef struct set_list
 {
@@ -86,16 +90,16 @@ int     parse_spaces(char *str, int i, t_list **lst);
 void    classing(t_list **lst);
 
 // syntax functions
-int    check_redirection_followed_by_pipe(t_list *lst);
-int    check_consecutive_pipes(t_list *lst);
-int    is_space(t_list *token);
-int    is_valid_next(t_list *token);
-int    syntax1(t_list **lst);
-int    syntax2(t_list **lst);
-int    syntax3(t_list **lst);
-int    syntax4(t_list **lst);
-int    syntax(t_list **lst);
-int    error_message();
+int     check_redirection_followed_by_pipe(t_list *lst);
+int     check_consecutive_pipes(t_list *lst);
+int     is_space(t_list *token);
+int     is_valid_next(t_list *token);
+int     syntax_redpipe(t_list **lst);
+int     syntax_consecutive_redirection(t_list **lst);
+int     syntax_end_of_command(t_list **lst);
+int     syntax_quotes(t_list **lst);
+int     syntax(t_list **lst);
+int     error_message();
 
 //expand functions
 char *get_var_value(char *str);

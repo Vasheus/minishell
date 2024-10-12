@@ -6,17 +6,20 @@
 /*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 11:10:03 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/12 13:42:17 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/12 15:30:38 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parcing.h"
 
-int main(void)
+int main(int ac, char **av)
 {
-    char    *input;
-    t_list  *lst;
-    t_list  *tmp;
+    (void)ac;
+    (void)av;
+    
+    char        *input;
+    t_list      *lst;
+    t_list      *tmp;
 
     while (1)
     {
@@ -30,6 +33,8 @@ int main(void)
         lst = parsing(input);
         syntax(&lst);
         classing(&lst);
+        
+        settingargs(&lst);
 
         tmp = lst;
         while (tmp)
