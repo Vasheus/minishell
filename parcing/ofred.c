@@ -6,7 +6,7 @@
 /*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 20:11:35 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/10 16:42:29 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/12 14:05:12 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,19 @@ void handle_redirections(t_list *token, set_args *cmd_args)
     cmd_args->input = 0;
     cmd_args->output = 1;
     if(token->command == RD_OUT)
-        cmd_args->output = open(token->next->content, O_CREAT | O_WRONLY | O_TRUNC, 644);
+    {
+        if(cmd_args->output != 1)
+            close(cmd_args->output);
+        cmd_args->output = open(token->next->content, O_CREAT | O_WRONLY , 644);
+    }
     else if(token->command == RD_IN)
         cmd_args->input = open(token->next->content, O_RDONLY);
     else if(token->command == APPEND)
+    {
+        if(cmd_args->output != 1)
+            close(cmd_args->output);
         cmd_args->output = open(token->next->content, O_CREAT | O_WRONLY | O_APPEND, 644);
+    }
     else if (token->command == HEREDOC)
         cmd_args->output = create_unique_heredoc_file();
     
