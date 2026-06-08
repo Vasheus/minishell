@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 10:46:17 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/12 14:36:04 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/12 19:47:57 by ael-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int is_space(t_list *token)
 {
-    return (token && (token->command == SPACE));
+    return (token && (token->command == SPACEE));
 }
 
 int check_redirection_followed_by_pipe(t_list *current)
@@ -78,6 +78,6 @@ int syntax(t_list **lst)
 {
     if (syntax_consecutive_redirection(lst) || syntax_end_of_command(lst) 
         || syntax_quotes(lst) || syntax_redpipe(lst))
-        error_message(1);
+        return (error_message(1), 1);
     return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_word_space.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 11:57:00 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/02 19:01:44 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/12 17:36:04 by ael-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int parse_spaces(char *str, int i, t_list **lst)
     t_list *new_node;
 
     new_node = ft_lstnew(ft_substr(str, i, 1));
-    new_node->command = SPACE;
+    new_node->command = SPACEE;
     
     while (str[i] == ' ' || str[i] == '\t')
         i++;

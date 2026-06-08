@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ofred.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 20:11:35 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/12 16:50:43 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/12 17:35:51 by ael-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int open_file(const char *filename, int flags)
 
 t_list *skip_spaces(t_list *token) 
 {
-    while (token && token->command == SPACE)
+    while (token && token->command == SPACEE)
         token = token->next;
     return token;
 }

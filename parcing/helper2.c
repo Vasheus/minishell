@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 13:42:22 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/10 16:02:44 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/12 17:51:23 by ael-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,21 @@ char	*ft_itoa(int n)
 		ptr[0] = '-';
 	return (ptr);
 }
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
-{
-	size_t	i;
+// size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+// {
+// 	size_t	i;
 
-	i = 0;
-	if (!dstsize)
-		return (ft_strlen(src));
-	while (src[i] && i < dstsize - 1)
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (ft_strlen(src));
-}
+// 	i = 0;
+// 	if (!dstsize)
+// 		return (ft_strlen(src));
+// 	while (src[i] && i < dstsize - 1)
+// 	{
+// 		dst[i] = src[i];
+// 		i++;
+// 	}
+// 	dst[i] = '\0';
+// 	return (ft_strlen(src));
+// }
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
 	size_t	j;

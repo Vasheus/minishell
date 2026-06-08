@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   settinglist.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:44:50 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/12 16:49:06 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/12 20:24:51 by ael-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void storing_args(t_list **current, set_args *cmd_args)
         if ((*current)->command == WORD || (*current)->command == S_QUOTE ||
             (*current)->command == D_QUOTE)
             add_arg_to_set_args(cmd_args, (*current)->content);
-        else if ((*current)->command == VAR)
+		else if ((*current)->command == VAR)
         {
             char *var_value;
             
